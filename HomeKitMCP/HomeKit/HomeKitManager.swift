@@ -171,18 +171,15 @@ final class HomeKitManager: NSObject {
             try await setCharacteristic(accessory: accessory,
                                         type: HMCharacteristicTypeSaturation,
                                         value: max(0, min(100, saturation)))
+        // NOTE: "unlock" and "open" are deliberately NOT implemented. This server
+        // is exposed to LLM sessions that read untrusted content, and a prompt
+        // injection reaching those actions could unlock the house. Only the
+        // securing directions are supported; "unlock"/"open" fall through to
+        // the default case and throw unknownAction.
         case "lock":
             try await setCharacteristic(accessory: accessory,
                                         type: HMCharacteristicTypeTargetLockMechanismState,
                                         value: HMCharacteristicValueLockMechanismState.secured.rawValue)
-        case "unlock":
-            try await setCharacteristic(accessory: accessory,
-                                        type: HMCharacteristicTypeTargetLockMechanismState,
-                                        value: HMCharacteristicValueLockMechanismState.unsecured.rawValue)
-        case "open":
-            try await setCharacteristic(accessory: accessory,
-                                        type: HMCharacteristicTypeTargetDoorState,
-                                        value: HMCharacteristicValueDoorState.open.rawValue)
         case "close":
             try await setCharacteristic(accessory: accessory,
                                         type: HMCharacteristicTypeTargetDoorState,

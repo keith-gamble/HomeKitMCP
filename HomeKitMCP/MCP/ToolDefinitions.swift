@@ -81,9 +81,10 @@ enum ToolDefinitions {
             on, off, toggle (lights/switches/outlets/fans), \
             set_brightness (0-100), set_hue (0-360), set_saturation (0-100), \
             set_color ({hue, saturation}), \
-            lock, unlock (locks), \
-            open, close (garage doors), \
-            set_temperature (celsius), set_thermostat_mode (off/heat/cool/auto)
+            lock (locks), \
+            close (garage doors), \
+            set_temperature (celsius), set_thermostat_mode (off/heat/cool/auto). \
+            Unlocking and opening are not supported.
             """,
         inputSchema: .object([
             "type": .string("object"),
@@ -106,13 +107,12 @@ enum ToolDefinitions {
                 ]),
                 "action": .object([
                     "type": .string("string"),
-                    "description": .string("Action to perform: on, off, toggle, set_brightness, set_hue, set_saturation, set_color, lock, unlock, open, close, set_temperature, set_thermostat_mode"),
+                    "description": .string("Action to perform: on, off, toggle, set_brightness, set_hue, set_saturation, set_color, lock, close, set_temperature, set_thermostat_mode"),
                     "enum": .array([
                         .string("on"), .string("off"), .string("toggle"),
                         .string("set_brightness"), .string("set_hue"),
                         .string("set_saturation"), .string("set_color"),
-                        .string("lock"), .string("unlock"),
-                        .string("open"), .string("close"),
+                        .string("lock"), .string("close"),
                         .string("set_temperature"), .string("set_thermostat_mode"),
                     ]),
                 ]),
@@ -230,8 +230,7 @@ enum ToolDefinitions {
                         .string("on"), .string("off"), .string("toggle"),
                         .string("set_brightness"), .string("set_hue"),
                         .string("set_saturation"), .string("set_color"),
-                        .string("lock"), .string("unlock"),
-                        .string("open"), .string("close"),
+                        .string("lock"), .string("close"),
                         .string("set_temperature"), .string("set_thermostat_mode"),
                     ]),
                 ]),

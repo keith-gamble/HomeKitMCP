@@ -75,14 +75,17 @@ struct ToolDefinitionsTests {
                 if case .string(let s) = value { return s }
                 return nil
             }
+            // "unlock" and "open" are deliberately excluded — see the note in
+            // HomeKitManager.controlDevice(...).
             let expected = [
                 "on", "off", "toggle",
                 "set_brightness", "set_hue", "set_saturation", "set_color",
-                "lock", "unlock",
-                "open", "close",
+                "lock", "close",
                 "set_temperature", "set_thermostat_mode",
             ]
             #expect(actions == expected)
+            #expect(!actions.contains("unlock"))
+            #expect(!actions.contains("open"))
         } else {
             Issue.record("Could not extract action enum values from controlDevice schema")
         }
