@@ -1,2 +1,4 @@
 xcuserdata/
 Local.xcconfig
+default.profraw
+*.profraw
